@@ -7,9 +7,11 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import {
     DropdownMenu,
     DropdownMenuContent,
+    DropdownMenuGroup,
     DropdownMenuItem,
     DropdownMenuLabel,
     DropdownMenuSeparator,
+    DropdownMenuShortcut,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import SignOutBtn from "./signout-btn";
@@ -38,13 +40,15 @@ const Navbar = async () => {
                         >
                             Find Jobs
                         </NavLink>
-                        <NavLink
-                            href="/candidate"
-                            className="py-[14px]"
-                            activeClassName="text-primary border-b-2 border-primary font-medium"
-                        >
-                            Home
-                        </NavLink>
+                        {
+                            session?.user && <NavLink
+                                href="/dashboard"
+                                className="py-[14px]"
+                                activeClassName="text-primary border-b-2 border-primary font-medium"
+                            >
+                                Dashboard
+                            </NavLink>
+                        }
                         <NavLink
                             href="/blogs"
                             className="py-[14px]"
@@ -83,6 +87,8 @@ const Navbar = async () => {
                             <>
                                 <BellRing className="w-5 h-5 mt-1" />
 
+                                <p>{session?.user?.role}</p>
+
                                 <DropdownMenu>
                                     <DropdownMenuTrigger className="outline-none focus:outline-none">
                                         <Avatar>
@@ -92,7 +98,7 @@ const Navbar = async () => {
                                             </AvatarFallback>
                                         </Avatar>
                                     </DropdownMenuTrigger>
-                                    <DropdownMenuContent>
+                                    <DropdownMenuContent align="end">
                                         <DropdownMenuLabel>My Account</DropdownMenuLabel>
                                         <DropdownMenuSeparator />
                                         <DropdownMenuItem>Profile</DropdownMenuItem>

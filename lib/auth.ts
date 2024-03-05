@@ -88,6 +88,10 @@ export const { handlers: { GET, POST }, auth, signIn, signOut, update } = NextAu
             session.user = token.user as User
             return session
         },
-    }
+        redirect({ baseUrl }) {
+            return baseUrl
+        },
+    },
+    
 
 })

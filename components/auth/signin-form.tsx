@@ -39,11 +39,14 @@ const SigninForm = () => {
     })
 
     const login: SubmitHandler<SigninInputType> = async (data) => {
+        setError('')
+        setSuccess('')
         startTransition(() => {
             signin(data)
                 .then((data) => {
                     setError(data?.error)
-                    setSuccess(data?.success)
+                }).catch(() => {
+                    setError("Email or Password Doesn't Match!")
                 })
         })
     }

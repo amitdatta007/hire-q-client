@@ -7,23 +7,24 @@ import { db } from "@/prisma/db";
 import { RegisterSchema, SigninSchema } from "@/schemas";
 import bcrypt from "bcryptjs";
 
-export const signin = async(values: SigninInputType) => {
+export const signin = async (values: SigninInputType) => {
     const validatedFields = SigninSchema.safeParse(values);
 
-    if(!validatedFields.success){
+    if (!validatedFields.success) {
         return { error: "Invalided Fields!" }
     }
 
-    await signIn('credentials', validatedFields.data)
 
-    return { success: "Email Send!" }
+    await signIn("credentials", {
+        ...validatedFields.data
+    })
 
 }
 
-export const register = async(values: RegisterInputType) => {
+export const register = async (values: RegisterInputType) => {
     const validatedFields = RegisterSchema.safeParse(values);
 
-    if(!validatedFields.success){
+    if (!validatedFields.success) {
         return { error: "Invalided Fields!" }
     }
 
@@ -36,7 +37,7 @@ export const register = async(values: RegisterInputType) => {
         }
     });
 
-    if(!!existingUser){
+    if (!!existingUser) {
         return { error: "Email Already Taken!" }
     }
 
@@ -54,14 +55,14 @@ export const register = async(values: RegisterInputType) => {
 
 }
 
-export const signInWithGithub = async() => {
+export const signInWithGithub = async () => {
     await signIn('github', {
         redirect: true,
         redirectTo: '/'
     })
-    
+
 }
-export const signInWithGoogle = async() => {
+export const signInWithGoogle = async () => {
     await signIn('google', {
         redirect: true,
         redirectTo: '/'
@@ -69,7 +70,7 @@ export const signInWithGoogle = async() => {
 }
 
 
-export const logOut = async() => {
+export const logOut = async () => {
     await signOut({
         redirect: true,
         redirectTo: '/'

@@ -1,5 +1,6 @@
 "use client"
 
+import { cn } from "@/lib/utils";
 import classNames from "@/utils/classNames";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -15,7 +16,7 @@ interface NavLinkProps extends React.HTMLAttributes<HTMLAnchorElement> {
 const NavLink = ({ children, activeClassName, href, exact, ...props }: NavLinkProps) => {
     const path = usePathname();
     const active = exact ? path === href : path.startsWith(href);
-    const classes = classNames(props.className, active && activeClassName);
+    const classes = cn(props.className, active && activeClassName);
 
     if(classes){
         props.className = classes;
