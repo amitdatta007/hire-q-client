@@ -91,7 +91,7 @@ export const { handlers: { GET, POST }, auth, signIn, signOut, update } = NextAu
         redirect({ baseUrl }) {
             return baseUrl
         },
-    },
     
+    },
 
 })

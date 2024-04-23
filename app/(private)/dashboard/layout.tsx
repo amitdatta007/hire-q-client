@@ -8,7 +8,7 @@ const DashboardLayout = async({ children }: { children: React.ReactNode }) => {
     const session = await auth();
 
     if(!session?.user?.role){
-        redirect('/')
+        redirect('/continue-as')
     }
 
     return (
@@ -17,7 +17,7 @@ const DashboardLayout = async({ children }: { children: React.ReactNode }) => {
             <main className="border-t border-border">
                 <div className="container flex">
                     <SideBar />
-                    <div className="flex-1 py-5 md:pl-4">
+                    <div className="flex-1 py-5 md:py-10 md:pl-6 xl:pl-10">
                         {children}
                     </div>
                 </div>

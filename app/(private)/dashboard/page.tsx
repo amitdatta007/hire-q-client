@@ -1,10 +1,17 @@
+import EmployerOverview from '@/components/dashboard/employer-overview';
+import Header from '@/components/dashboard/header';
 import React from 'react';
 
 const DashboardPage = () => {
     return (
-        <div className='bg-red-500'>
-            dashboard
-        </div>
+        <>  
+            <Header
+                title="My Jobs"
+                subTitle="560"
+                description="Here Is Your Daily"
+            />
+            <EmployerOverview />
+        </>
     );
 };
 
